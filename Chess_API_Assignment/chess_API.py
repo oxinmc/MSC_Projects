@@ -290,5 +290,45 @@ plt.plot(x, fit_y, label="Fitted Curve", color='b')
 plt.show()
 
 
+#####################################################################################################
+# Section 6
+'''
+Further analysis. Exploring any relationship between the number of a player's games (bullet or otherwise)
+and the effect ths has on their rating change, in addition, the rank of a player is outlined in a 
+colour gradient and used to observe if this has an effect on the number of games played.
+'''
 
+#Function representing the logarithmic fit equation.
+print('The logarithmic fit equation: y = ({:.2f}).ln(x) + {:.2f}'.format(popt[0], popt[1]))
+
+#Zoomed in graph of the logarithmic function, showing the a close up of the area of greatest improvement.
+plt.title('Logarithmic fit of rating improvement with games played')
+plt.plot(x, fit_y, label="Fitted Curve", color='r')
+plt.xlabel ('Accumulative Number of Bullet Games Played')
+plt.ylabel ('Change in Rating')
+plt.axis([-100,3000,400,1400])
+plt.show()
+
+
+#Colour gradient to show higher rated players in red and lower rated players in yellow
+colors1 = plt.cm.autumn(np.linspace(0,1,len(final_games_bull)))
+colors2 = plt.cm.autumn(np.linspace(0,1,len(final_games)))
+
+j=0
+plt.title('Bullet games played vs change in rating')
+for i,k in zip(final_games_bull, final_rating):
+    plt.scatter(i, k, marker='o', c=colors1[j])
+    j =j+1
+plt.xlabel ('Number of Bullet Games Played')
+plt.ylabel ('Change in Rating')
+plt.show()
+
+j=0
+plt.title('Total games played outside of bullet vs change in rating')
+for i,k in zip(final_games, final_rating):
+    plt.scatter(i, k, marker='o', c=colors2[j])
+    j =j+1
+plt.xlabel ('Number of Total Games Played')
+plt.ylabel ('Change in Rating')
+plt.show()
 
